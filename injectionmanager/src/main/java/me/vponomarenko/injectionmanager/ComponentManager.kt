@@ -17,8 +17,7 @@ internal class ComponentManager {
         componentsForView[key] = component
     }
 
-    fun get(key: String): Any =
-        componentsForView[key] ?: throw ComponentNotFoundException()
+    fun get(key: String): Any = componentsForView[key] ?: throw ComponentNotFoundException()
 
     fun remove(key: String) {
         componentsForView.remove(key)
