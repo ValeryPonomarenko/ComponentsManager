@@ -9,6 +9,11 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_feature_b.*
 import me.vponomarenko.core.SimpleTextWatcher
 import me.vponomarenko.core.TextHolder
+import me.vponomarenko.feature.b.di.FeatureBComponent
+import me.vponomarenko.feature.b.di.TextHolderForFeatureB
+import me.vponomarenko.injectionmanager.IHasComponent
+import me.vponomarenko.injectionmanager.InjectionManager
+import javax.inject.Inject
 
 /**
  * Author: Valery Ponomarenko
@@ -16,19 +21,26 @@ import me.vponomarenko.core.TextHolder
  * LinkedIn: https://www.linkedin.com/in/ponomarenkovalery
  */
 
-class FragmentB : Fragment() {
+class FragmentB : Fragment(), IHasComponent {
+
+    @Inject
+    lateinit var singletonTextHolder: TextHolder
+
+    @Inject
+    @field:TextHolderForFeatureB
+    lateinit var featureBTextHolder: TextHolder
 
     private val editTextWatcherForSingleton = object : SimpleTextWatcher() {
         override fun afterTextChanged(s: Editable) {
             if (s.isEmpty()) return
-            TextHolder.instance.text = s.toString()
+            singletonTextHolder.text = s.toString()
         }
     }
 
     private val editTextWatcherForFeatureB = object : SimpleTextWatcher() {
         override fun afterTextChanged(s: Editable) {
             if (s.isEmpty()) return
-//            TextHolder.instance.text = s.toString()
+            featureBTextHolder.text = s.toString()
         }
     }
 
@@ -40,6 +52,9 @@ class FragmentB : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        InjectionManager.instance
+            .bindComponent<FeatureBComponent>(this)
+            .inject(this)
         if (savedInstanceState == null) {
             childFragmentManager.beginTransaction()
                 .replace(R.id.childFragmentContainer, FragmentChildB())
@@ -52,4 +67,6 @@ class FragmentB : Fragment() {
         editText_singleton.addTextChangedListener(editTextWatcherForSingleton)
         editText_feature_b.addTextChangedListener(editTextWatcherForFeatureB)
     }
+
+    override fun createComponent() = FeatureBComponent.Initializer.init()
 }

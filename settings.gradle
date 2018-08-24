@@ -1,1 +1,1 @@
-include ':app', ':feature_b', ':feature_a', ':core'
+include ':app', ':feature_b', ':feature_a', ':core', ':injectionmanager'

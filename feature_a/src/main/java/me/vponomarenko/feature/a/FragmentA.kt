@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_feature_a.*
 import me.vponomarenko.core.TextHolder
+import me.vponomarenko.feature.a.di.FeatureAComponent
+import me.vponomarenko.injectionmanager.IHasComponent
+import me.vponomarenko.injectionmanager.InjectionManager
+import javax.inject.Inject
 
 /**
  * Author: Valery Ponomarenko
@@ -14,7 +18,10 @@ import me.vponomarenko.core.TextHolder
  * LinkedIn: https://www.linkedin.com/in/ponomarenkovalery
  */
 
-class FragmentA : Fragment() {
+class FragmentA : Fragment(), IHasComponent {
+
+    @Inject
+    lateinit var textHolder: TextHolder
 
     private val textHolderWatcher = { changedText: String ->
         text.text = changedText
@@ -26,13 +33,20 @@ class FragmentA : Fragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_feature_a, container, false)
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        InjectionManager.instance.bindComponent<FeatureAComponent>(this).inject(this)
+    }
+
     override fun onResume() {
         super.onResume()
-        TextHolder.instance.subscribe(textHolderWatcher)
+        textHolder.subscribe(textHolderWatcher)
     }
 
     override fun onPause() {
         super.onPause()
-        TextHolder.instance.unsubscribe(textHolderWatcher)
+        textHolder.unsubscribe(textHolderWatcher)
     }
+
+    override fun createComponent() = FeatureAComponent.Initializer.init()
 }

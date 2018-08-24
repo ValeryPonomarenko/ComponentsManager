@@ -9,10 +9,6 @@ import kotlin.properties.Delegates
  */
 
 class TextHolder {
-    companion object {
-        val instance by lazy { TextHolder() }
-    }
-
     private val observers = mutableListOf<(String) -> Unit>()
 
     var text by Delegates.observable("Default") { _, old, new ->

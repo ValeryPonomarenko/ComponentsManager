@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
@@ -30,17 +29,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    implementation project(':core')
-    implementation project(':injectionmanager')
-
-    implementation "androidx.appcompat:appcompat:${versions.appcompat}"
-    implementation "com.google.android.material:material:${versions.material}"
-    implementation "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
-    implementation "androidx.vectordrawable:vectordrawable:${versions.vectordrawable}"
-
-    implementation "com.google.dagger:dagger:${versions.dagger}"
-    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
 
     implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
     testImplementation 'junit:junit:4.12'
