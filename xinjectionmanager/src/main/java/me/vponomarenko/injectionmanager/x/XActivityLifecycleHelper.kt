@@ -1,11 +1,11 @@
-package me.vponomarenko.injectionmanager.helpers
+package me.vponomarenko.injectionmanager.x
 
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import me.vponomarenko.injectionmanager.ComponentManager
 import me.vponomarenko.injectionmanager.IHasComponent
+import me.vponomarenko.injectionmanager.callbacks.IRemoveComponentCallback
 
 /**
  * Author: Valery Ponomarenko
@@ -13,8 +13,8 @@ import me.vponomarenko.injectionmanager.IHasComponent
  * LinkedIn: https://www.linkedin.com/in/ponomarenkovalery
  */
 
-internal class ActivityLifecycleHelper(
-    private val componentManager: ComponentManager
+internal class XActivityLifecycleHelper(
+    private val removeComponentCallback: IRemoveComponentCallback
 ) : Application.ActivityLifecycleCallbacks {
     override fun onActivityPaused(activity: Activity) {
     }
@@ -27,7 +27,7 @@ internal class ActivityLifecycleHelper(
 
     override fun onActivityDestroyed(activity: Activity) {
         if (activity is IHasComponent && activity.isFinishing) {
-            componentManager.remove(activity.getComponentKey())
+            removeComponentCallback.onRemove(activity.getComponentKey())
         }
     }
 
@@ -40,7 +40,7 @@ internal class ActivityLifecycleHelper(
     override fun onActivityCreated(activity: Activity, outState: Bundle?) {
         if (activity is AppCompatActivity) {
             activity.supportFragmentManager.registerFragmentLifecycleCallbacks(
-                FragmentLifecycleHelper(componentManager),
+                XFragmentLifecycleHelper(removeComponentCallback),
                 true
             )
         }

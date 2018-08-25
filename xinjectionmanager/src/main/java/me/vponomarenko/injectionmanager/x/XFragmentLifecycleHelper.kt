@@ -1,10 +1,10 @@
-package me.vponomarenko.injectionmanager.helpers
+package me.vponomarenko.injectionmanager.x
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import me.vponomarenko.injectionmanager.ComponentManager
 import me.vponomarenko.injectionmanager.IHasComponent
+import me.vponomarenko.injectionmanager.callbacks.IRemoveComponentCallback
 
 /**
  * Author: Valery Ponomarenko
@@ -12,8 +12,8 @@ import me.vponomarenko.injectionmanager.IHasComponent
  * LinkedIn: https://www.linkedin.com/in/ponomarenkovalery
  */
 
-internal class FragmentLifecycleHelper(
-    private val componentManager: ComponentManager
+internal class XFragmentLifecycleHelper(
+    private val removeComponentCallback: IRemoveComponentCallback
 ) : FragmentManager.FragmentLifecycleCallbacks() {
     private var isInSaveState = false
 
@@ -37,7 +37,7 @@ internal class FragmentLifecycleHelper(
         if (f !is IHasComponent) return
 
         if (f.requireActivity().isFinishing) {
-            componentManager.remove(f.javaClass.toString())
+            removeComponentCallback.onRemove(f.getComponentKey())
             return
         }
 
@@ -53,7 +53,7 @@ internal class FragmentLifecycleHelper(
             parent = parent.parentFragment
         }
         if (f.isRemoving || anyParentIsRemoving) {
-            componentManager.remove(f.getComponentKey())
+            removeComponentCallback.onRemove(f.getComponentKey())
         }
     }
 }

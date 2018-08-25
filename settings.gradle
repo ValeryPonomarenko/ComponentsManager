@@ -1,4 +1,4 @@
-include ':app', ':feature_b', ':feature_a', ':core', ':injectionmanager'
+include ':app', ':feature_b', ':feature_a', ':core', ':injectionmanager', ':xinjectionmanager'
 project(':app').projectDir = new File(rootDir, 'example/app')
 project(':core').projectDir = new File(rootDir, 'example/core')
 project(':feature_a').projectDir = new File(rootDir, 'example/feature_a')

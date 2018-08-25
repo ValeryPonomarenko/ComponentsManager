@@ -4,7 +4,7 @@ import dagger.Component
 import me.vponomarenko.core.di.AppDependencies
 import me.vponomarenko.feature.b.FragmentB
 import me.vponomarenko.feature.b.FragmentChildB
-import me.vponomarenko.injectionmanager.InjectionManager
+import me.vponomarenko.injectionmanager.x.XInjectionManager
 
 /**
  * Author: Valery Ponomarenko
@@ -22,7 +22,7 @@ interface FeatureBComponent {
         companion object {
             fun init(): FeatureBComponent =
                 DaggerFeatureBComponent.builder()
-                    .appDependencies(InjectionManager.instance.findComponent())
+                    .appDependencies(XInjectionManager.instance.findComponent())
                     .build()
         }
     }

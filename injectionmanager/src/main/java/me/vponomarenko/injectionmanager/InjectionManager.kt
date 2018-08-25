@@ -1,7 +1,7 @@
 package me.vponomarenko.injectionmanager
 
 import android.app.Application
-import me.vponomarenko.injectionmanager.helpers.ActivityLifecycleHelper
+import me.vponomarenko.injectionmanager.callbacks.ILifecycleListener
 
 /**
  * Author: Valery Ponomarenko
@@ -9,18 +9,15 @@ import me.vponomarenko.injectionmanager.helpers.ActivityLifecycleHelper
  * LinkedIn: https://www.linkedin.com/in/ponomarenkovalery
  */
 
-class InjectionManager {
-
-    companion object {
-        val instance by lazy { InjectionManager() }
-    }
-
+class InjectionManager(
+    private val lifecycleListener: ILifecycleListener
+) {
     private val componentManager = ComponentManager()
 
     @Suppress("UNCHECKED_CAST")
     fun <T> bindComponent(owner: IHasComponent): T {
         when (owner) {
-            is Application -> addActivityCallbacks(owner)
+            is Application -> addLifecycleCallbacks(owner)
         }
         return getComponentOrCreate(owner.getComponentKey(), owner) as T
     }
@@ -38,7 +35,7 @@ class InjectionManager {
         }
     }
 
-    private fun addActivityCallbacks(app: Application) {
-        app.registerActivityLifecycleCallbacks(ActivityLifecycleHelper(componentManager))
+    private fun addLifecycleCallbacks(app: Application) {
+        lifecycleListener.addLifecycleListener(app, componentManager)
     }
 }

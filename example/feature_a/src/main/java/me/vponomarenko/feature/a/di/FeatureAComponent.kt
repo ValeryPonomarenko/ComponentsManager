@@ -3,7 +3,7 @@ package me.vponomarenko.feature.a.di
 import dagger.Component
 import me.vponomarenko.core.di.AppDependencies
 import me.vponomarenko.feature.a.FragmentA
-import me.vponomarenko.injectionmanager.InjectionManager
+import me.vponomarenko.injectionmanager.x.XInjectionManager
 
 /**
  * Author: Valery Ponomarenko
@@ -20,7 +20,7 @@ interface FeatureAComponent {
         companion object {
             fun init(): FeatureAComponent =
                 DaggerFeatureAComponent.builder()
-                    .appDependencies(InjectionManager.instance.findComponent())
+                    .appDependencies(XInjectionManager.instance.findComponent())
                     .build()
         }
     }

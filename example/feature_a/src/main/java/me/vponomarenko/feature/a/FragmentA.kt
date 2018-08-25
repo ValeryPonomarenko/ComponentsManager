@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.fragment_feature_a.*
 import me.vponomarenko.core.TextHolder
 import me.vponomarenko.feature.a.di.FeatureAComponent
 import me.vponomarenko.injectionmanager.IHasComponent
-import me.vponomarenko.injectionmanager.InjectionManager
+import me.vponomarenko.injectionmanager.x.XInjectionManager
 import javax.inject.Inject
 
 /**
@@ -35,7 +35,9 @@ class FragmentA : Fragment(), IHasComponent {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        InjectionManager.instance.bindComponent<FeatureAComponent>(this).inject(this)
+        XInjectionManager.instance
+            .bindComponent<FeatureAComponent>(this)
+            .inject(this)
     }
 
     override fun onResume() {
