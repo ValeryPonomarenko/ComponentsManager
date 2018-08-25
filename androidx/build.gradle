@@ -1,6 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.ValeryPonomarenko.ComponentsManager'
+
 android {
     compileSdkVersion 28
 
@@ -25,5 +28,5 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api project(':injectionmanager')
 
-    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
+    implementation "androidx.appcompat:appcompat:${versions.appcompat}"
 }

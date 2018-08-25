@@ -27,7 +27,7 @@ dependencies {
     implementation project(':core')
     implementation project(':feature_a')
     implementation project(':feature_b')
-    implementation project(':xinjectionmanager')
+    implementation project(':androidx')
 
     implementation "androidx.appcompat:appcompat:${versions.appcompat}"
     implementation "com.google.android.material:material:${versions.material}"
