@@ -28,7 +28,7 @@ dependencies {
     implementation project(':feature_a')
     implementation project(':feature_b')
     implementation project(':androidx')
-
+    
     implementation "androidx.appcompat:appcompat:${versions.appcompat}"
     implementation "com.google.android.material:material:${versions.material}"
     implementation "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
