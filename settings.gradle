@@ -1,1 +1,5 @@
 include ':app', ':feature_b', ':feature_a', ':core', ':injectionmanager'
+project(':app').projectDir = new File(rootDir, 'example/app')
+project(':core').projectDir = new File(rootDir, 'example/core')
+project(':feature_a').projectDir = new File(rootDir, 'example/feature_a')
+project(':feature_b').projectDir = new File(rootDir, 'example/feature_b')
