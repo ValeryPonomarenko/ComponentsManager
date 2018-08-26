@@ -5,12 +5,12 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-beta04'
+        classpath 'com.android.tools.build:gradle:3.1.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -21,7 +21,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "https://jitpack.io" }
     }
 }
 
@@ -37,3 +36,24 @@ ext.versions = [
         dagger           : "2.17",
         supportappcompat : "27.1.1"
 ]
+
+ext {
+    bintrayRepo = 'ComponentsManager'
+
+    publishedGroupId = 'com.github.valeryponomarenko.componentsmanager'
+
+    libraryDescription = 'Test'
+
+    siteUrl = 'https://github.com/ValeryPonomarenko/ComponentsManager'
+    gitUrl = 'https://github.com/ValeryPonomarenko/ComponentsManager.git'
+
+    libraryVersion = '0.2.0'
+
+    developerId = 'valeroncho'
+    developerName = 'Valery Ponomarenko'
+    developerEmail = 'valery.v.ponomarenko@yandex.ru'
+
+    licenseName = 'MIT License'
+    licenseUrl = 'https://opensource.org/licenses/MIT'
+    allLicenses = ["MIT"]
+}

@@ -1,14 +1,19 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.ValeryPonomarenko.ComponentsManager'
+apply plugin: 'com.jfrog.bintray'
+
+ext {
+    bintrayName = 'AndroidX'
+    libraryName = 'AndroidX'
+    artifact = 'androidx'
+}
 
 android {
     compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 14
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -25,8 +30,11 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api project(':injectionmanager')
+//    api 'com.github.valeryponomarenko.componentsmanager:core:0.2.0'
 
     implementation "androidx.appcompat:appcompat:${versions.appcompat}"
 }
+
+apply from: '../publish.gradle'

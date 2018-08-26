@@ -1,14 +1,19 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.ValeryPonomarenko.ComponentsManager'
+apply plugin: 'com.jfrog.bintray'
+
+ext {
+    bintrayName = 'AppCompat'
+    libraryName = 'AppCompat'
+    artifact = 'appcompat'
+}
 
 android {
     compileSdkVersion 27
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 14
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -30,3 +35,5 @@ dependencies {
 
     implementation "com.android.support:appcompat-v7:${versions.supportappcompat}"
 }
+
+apply from: '../publish.gradle'

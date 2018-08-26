@@ -5,6 +5,8 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
+    buildToolsVersion '27.0.3'
+
     defaultConfig {
         applicationId "me.vponomarenko.componentmanager"
         minSdkVersion 19
