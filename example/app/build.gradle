@@ -29,7 +29,6 @@ dependencies {
     implementation project(':core')
     implementation project(':feature_a')
     implementation project(':feature_b')
-    implementation project(':androidx')
 
     implementation "androidx.appcompat:appcompat:${versions.appcompat}"
     implementation "com.google.android.material:material:${versions.material}"
@@ -38,4 +37,6 @@ dependencies {
 
     implementation "com.google.dagger:dagger:${versions.dagger}"
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+
+    implementation "com.github.valeryponomarenko.componentsmanager:androidx:${versions.componentmanager}"
 }

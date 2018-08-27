@@ -29,12 +29,13 @@ task clean(type: Delete) {
 }
 
 ext.versions = [
-        appcompat        : "1.0.0-rc01",
-        material         : "1.0.0-rc01",
-        constraintlayout : "2.0.0-alpha2",
-        vectordrawable   : "1.0.0-rc01",
-        dagger           : "2.17",
-        supportappcompat : "27.1.1"
+        appcompat       : "1.0.0-rc01",
+        material        : "1.0.0-rc01",
+        constraintlayout: "2.0.0-alpha2",
+        vectordrawable  : "1.0.0-rc01",
+        dagger          : "2.17",
+        supportappcompat: "27.1.1",
+        componentmanager: "0.2.0"
 ]
 
 ext {
@@ -47,7 +48,7 @@ ext {
     siteUrl = 'https://github.com/ValeryPonomarenko/ComponentsManager'
     gitUrl = 'https://github.com/ValeryPonomarenko/ComponentsManager.git'
 
-    libraryVersion = '0.2.0'
+    libraryVersion = versions.componentmanager
 
     developerId = 'valeroncho'
     developerName = 'Valery Ponomarenko'

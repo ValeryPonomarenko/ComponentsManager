@@ -31,7 +31,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api project(':injectionmanager')
+    api "com.github.valeryponomarenko.componentsmanager:injectionmanager:${versions.componentmanager}"
 
     implementation "com.android.support:appcompat-v7:${versions.supportappcompat}"
 }
