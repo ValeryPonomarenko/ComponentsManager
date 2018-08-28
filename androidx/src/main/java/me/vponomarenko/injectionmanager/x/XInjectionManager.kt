@@ -9,5 +9,6 @@ import me.vponomarenko.injectionmanager.InjectionManager
  */
 
 object XInjectionManager {
+    @JvmStatic
     val instance = InjectionManager(XLifecycleListener())
 }

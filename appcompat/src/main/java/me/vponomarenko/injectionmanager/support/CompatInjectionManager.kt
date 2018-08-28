@@ -9,5 +9,6 @@ import me.vponomarenko.injectionmanager.InjectionManager
  */
 
 object CompatInjectionManager {
+    @JvmStatic
     val instance = InjectionManager(CompatLifecycleListener())
 }
