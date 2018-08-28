@@ -19,7 +19,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -30,10 +29,11 @@ dependencies {
 
     implementation "androidx.appcompat:appcompat:${versions.appcompat}"
     implementation "com.google.android.material:material:${versions.material}"
+    implementation "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
 
     implementation "com.google.dagger:dagger:${versions.dagger}"
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
 
-//    implementation "com.github.valeryponomarenko.componentsmanager:androidx:${versions.componentmanager}"
+    //    implementation "com.github.valeryponomarenko.componentsmanager:androidx:${versions.componentmanager}"
     implementation project(':androidx')
 }

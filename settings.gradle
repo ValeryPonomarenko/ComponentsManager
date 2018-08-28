@@ -1,5 +1,6 @@
-include ':app', ':feature_b', ':feature_a', ':core', ':injectionmanager', ':androidx', ':appcompat'
+include ':app', ':feature_b', ':feature_a', ':core', ':injectionmanager', ':androidx', ':appcompat', ':feature_c'
 project(':app').projectDir = new File(rootDir, 'example/app')
 project(':core').projectDir = new File(rootDir, 'example/core')
 project(':feature_a').projectDir = new File(rootDir, 'example/feature_a')
 project(':feature_b').projectDir = new File(rootDir, 'example/feature_b')
+project(':feature_c').projectDir = new File(rootDir, 'example/feature_c')
