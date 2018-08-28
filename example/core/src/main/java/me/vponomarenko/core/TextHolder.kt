@@ -1,5 +1,6 @@
 package me.vponomarenko.core
 
+import java.util.Date
 import kotlin.properties.Delegates
 
 /**
@@ -11,7 +12,7 @@ import kotlin.properties.Delegates
 class TextHolder {
     private val observers = mutableListOf<(String) -> Unit>()
 
-    var text by Delegates.observable("Default") { _, old, new ->
+    var text by Delegates.observable("Created at ${Date()}") { _, old, new ->
         observers.forEach { it(new) }
     }
 
