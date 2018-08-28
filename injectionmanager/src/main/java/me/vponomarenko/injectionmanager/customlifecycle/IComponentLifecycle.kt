@@ -10,5 +10,5 @@ interface IComponentLifecycle {
     /**
      * Removes the component from the store
      */
-    fun remove()
+    fun destroy()
 }

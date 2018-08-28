@@ -1,0 +1,4 @@
+<resources>
+    <string name="singleton_scope">\@Singleton scope</string>
+    <string name="feature_c_scope">\@FeatureC scope\n+\ncustom lifecycle</string>
+</resources>

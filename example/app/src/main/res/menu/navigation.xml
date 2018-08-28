@@ -11,4 +11,9 @@
         android:icon="@drawable/ic_edit"
         android:title="@string/title_feature_b" />
 
+    <item
+        android:id="@+id/navigation_feature_c"
+        android:icon="@drawable/ic_access_time"
+        android:title="@string/title_feature_c" />
+
 </menu>

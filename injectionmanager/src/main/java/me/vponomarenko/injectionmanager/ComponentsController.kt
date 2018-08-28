@@ -33,7 +33,7 @@ internal class ComponentsController(
     fun getCustomLifecycleForKey(key: String): IComponentLifecycle {
         keysForCustomLifecycle.add(key)
         return object : IComponentLifecycle {
-            override fun remove() {
+            override fun destroy() {
                 keysForCustomLifecycle.remove(key)
                 onRemove(key)
             }

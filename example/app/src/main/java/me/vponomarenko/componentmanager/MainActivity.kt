@@ -7,6 +7,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import me.vponomarenko.feature.a.FragmentA
 import me.vponomarenko.feature.b.FragmentB
+import me.vponomarenko.feature.c.FragmentC
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +20,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.navigation_feature_b -> {
                     openFragment(FragmentB())
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_feature_c -> {
+                    openFragment(FragmentC())
                     return@OnNavigationItemSelectedListener true
                 }
             }

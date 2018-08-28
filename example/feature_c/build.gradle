@@ -1,19 +1,18 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '27.0.3'
 
     defaultConfig {
-        applicationId "me.vponomarenko.componentmanager"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -27,18 +26,14 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation project(':core')
-    implementation project(':feature_a')
-    implementation project(':feature_b')
-    implementation project(':feature_c')
 
     implementation "androidx.appcompat:appcompat:${versions.appcompat}"
     implementation "com.google.android.material:material:${versions.material}"
     implementation "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
-    implementation "androidx.vectordrawable:vectordrawable:${versions.vectordrawable}"
 
     implementation "com.google.dagger:dagger:${versions.dagger}"
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
 
-//    implementation "com.github.valeryponomarenko.componentsmanager:androidx:${versions.componentmanager}"
+    //    implementation "com.github.valeryponomarenko.componentsmanager:androidx:${versions.componentmanager}"
     implementation project(':androidx')
 }
