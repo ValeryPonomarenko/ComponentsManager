@@ -17,7 +17,7 @@ implementation "com.github.valeryponomarenko.componentsmanager:androidx:LATEST_V
 If you are using **AppCompat**
 
 ```gradle
-COMING SOON
+implementation 'com.github.valeryponomarenko.componentsmanager:appcompat:LATEST_VERSION'
 ```
 
 ## Idea
