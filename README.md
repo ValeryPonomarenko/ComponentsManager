@@ -35,7 +35,7 @@ class App : Application(), IHasComponent {
 ```
 Then bind this component to the owner. After the component was bound, the library returns the component, so you can do whatever you want with the component.
 
-Also, at this step the library registers the lifecycle listener for the future activities and the fragments, so the components will be destroyed when it is required.
+Also, at this step the library registers the lifecycle listener for the future activities and the fragments, so the components that is bound to the activity or fragment will be destroyed right after the destruction of the owner.
 
 ```kotlin
 class App : Application(), IHasComponent {
@@ -68,8 +68,8 @@ class FragmentChildB : Fragment() {
     }
 }
 ```
-If your class has a component you must do the same that you did with the Application class.
-Firstly, implement the `IHasComponent` interface then the method `createComponent` should return the dagger component and finally bind the component to the owner.
+If your class has a component, you must do the same that you did with the Application class.
+Firstly, implement the `IHasComponent` interface, then the method `createComponent` should return the dagger component and finally bind the component to the owner.
 
 ```kotlin
 class FragmentA : Fragment(), IHasComponent {
