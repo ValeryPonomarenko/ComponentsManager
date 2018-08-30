@@ -50,7 +50,7 @@ class App : Application(), IHasComponent {
     override fun createComponent(): AppComponent = DaggerAppComponent.builder().build()
 }
 ```
-If your class doesn't have a component and only needs some dependency from the AppComponent, you just call the `findComponent<AppComponent>` method and the library returns the needed component.
+If your class doesn't have its owen and uses, for example, the `MainComponent`, you need to class the `findComponent<AppComponent>` method and the library returns the needed component (if it exists, otherwise it will throw a `ComponentNotFoundException` exeption) .
 
 ```kotlin
 class FragmentChildB : Fragment() {
@@ -84,13 +84,15 @@ class FragmentA : Fragment(), IHasComponent {
             .inject(this)
     }
 
-    override fun createComponent(): FeatureAComponent = 
+    override fun createComponent(): FeatureAComponent =
         DaggerFeatureAComponent.builder()
-            .appDependencies(XInjectionManager.instance.findComponent())
+            .appDependencies(
+                XInjectionManager.instance.findComponent<AppDependencies>()
+            )
             .build()
 }
 ```
-Also, if some component needs a dependency, you can find it with method `findComponent`.
+Also, if a component needs a dependency, you can find it with method `findComponent`.
 
 That's all. There is no need to write code that will save, search or remove components anymore.
 
