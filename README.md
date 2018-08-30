@@ -17,7 +17,7 @@ implementation "com.github.valeryponomarenko.componentsmanager:androidx:LATEST_V
 If you are using **AppCompat**
 
 ```gradle
-implementation 'com.github.valeryponomarenko.componentsmanager:appcompat:LATEST_VERSION'
+implementation "com.github.valeryponomarenko.componentsmanager:appcompat:LATEST_VERSION"
 ```
 
 ## Idea
@@ -93,3 +93,5 @@ class FragmentA : Fragment(), IHasComponent {
 Also, if some component needs a dependency, you can find it with method `findComponent`.
 
 That's all. There is no need to write code that will save, search or remove components anymore.
+
+For more information, please, read the [wiki pages](https://github.com/ValeryPonomarenko/ComponentsManager/wiki).
