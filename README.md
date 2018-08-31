@@ -17,7 +17,7 @@ implementation "com.github.valeryponomarenko.componentsmanager:androidx:LATEST_V
 If you are using **AppCompat**
 
 ```gradle
-implementation 'com.github.valeryponomarenko.componentsmanager:appcompat:LATEST_VERSION'
+implementation "com.github.valeryponomarenko.componentsmanager:appcompat:LATEST_VERSION"
 ```
 
 ## Idea
@@ -35,7 +35,7 @@ class App : Application(), IHasComponent {
 ```
 Then bind this component to the owner. After the component was bound, the library returns the component, so you can do whatever you want with the component.
 
-Also, at this step the library registers the lifecycle listener for the future activities and the fragments, so the components will be destroyed when it is required.
+Also, at this step the library registers the lifecycle listener for the future activities and the fragments, so the components that is bound to the activity or fragment will be destroyed right after the destruction of the owner.
 
 ```kotlin
 class App : Application(), IHasComponent {
@@ -50,7 +50,7 @@ class App : Application(), IHasComponent {
     override fun createComponent(): AppComponent = DaggerAppComponent.builder().build()
 }
 ```
-If your class doesn't have a component and only needs some dependency from the AppComponent, you just call the `findComponent<AppComponent>` method and the library returns the needed component.
+If your class doesn't have its owen and uses, for example, the `MainComponent`, you need to class the `findComponent<AppComponent>` method and the library returns the needed component (if it exists, otherwise it will throw a `ComponentNotFoundException` exeption) .
 
 ```kotlin
 class FragmentChildB : Fragment() {
@@ -68,8 +68,8 @@ class FragmentChildB : Fragment() {
     }
 }
 ```
-If your class has a component you must do the same that you did with the Application class.
-Firstly, implement the `IHasComponent` interface then the method `createComponent` should return the dagger component and finally bind the component to the owner.
+If your class has a component, you must do the same that you did with the Application class.
+Firstly, implement the `IHasComponent` interface, then the method `createComponent` should return the dagger component and finally bind the component to the owner.
 
 ```kotlin
 class FragmentA : Fragment(), IHasComponent {
@@ -84,12 +84,16 @@ class FragmentA : Fragment(), IHasComponent {
             .inject(this)
     }
 
-    override fun createComponent(): FeatureAComponent = 
+    override fun createComponent(): FeatureAComponent =
         DaggerFeatureAComponent.builder()
-            .appDependencies(XInjectionManager.instance.findComponent())
+            .appDependencies(
+                XInjectionManager.instance.findComponent<AppDependencies>()
+            )
             .build()
 }
 ```
-Also, if some component needs a dependency, you can find it with method `findComponent`.
+Also, if a component needs a dependency, you can find it with method `findComponent`.
 
 That's all. There is no need to write code that will save, search or remove components anymore.
+
+For more information, please, read the [wiki pages](https://github.com/ValeryPonomarenko/ComponentsManager/wiki).
