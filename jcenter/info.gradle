@@ -1,0 +1,20 @@
+ext {
+    bintrayRepo = 'ComponentsManager'
+
+    publishedGroupId = 'com.github.valeryponomarenko.componentsmanager'
+
+    libraryDescription = 'Manages the dagger component lifecycle'
+
+    siteUrl = 'https://github.com/ValeryPonomarenko/ComponentsManager'
+    gitUrl = 'https://github.com/ValeryPonomarenko/ComponentsManager.git'
+
+    libraryVersion = project.getVersionName()
+
+    developerId = 'valeroncho'
+    developerName = 'Valery Ponomarenko'
+    developerEmail = 'valery.v.ponomarenko@yandex.ru'
+
+    licenseName = 'MIT License'
+    licenseUrl = 'https://opensource.org/licenses/MIT'
+    allLicenses = ["MIT"]
+}
