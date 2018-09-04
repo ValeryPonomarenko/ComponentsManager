@@ -3,7 +3,7 @@ package me.vponomarenko.injectionmanager.helpers
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import me.vponomarenko.injectionmanager.ComponentManager
+import me.vponomarenko.injectionmanager.ComponentsStore
 import me.vponomarenko.injectionmanager.IHasComponent
 
 /**
@@ -13,7 +13,7 @@ import me.vponomarenko.injectionmanager.IHasComponent
  */
 
 internal class FragmentLifecycleHelper(
-    private val componentManager: ComponentManager
+    private val componentsStore: ComponentsStore
 ) : FragmentManager.FragmentLifecycleCallbacks() {
     private var isInSaveState = false
 
@@ -37,7 +37,7 @@ internal class FragmentLifecycleHelper(
         if (f !is IHasComponent) return
 
         if (f.requireActivity().isFinishing) {
-            componentManager.remove(f.javaClass.toString())
+            componentsStore.remove(f.javaClass.toString())
             return
         }
 
@@ -53,7 +53,7 @@ internal class FragmentLifecycleHelper(
             parent = parent.parentFragment
         }
         if (f.isRemoving || anyParentIsRemoving) {
-            componentManager.remove(f.getComponentKey())
+            componentsStore.remove(f.getComponentKey())
         }
     }
 }
