@@ -17,18 +17,18 @@ class InjectionManager {
 
     private val componentsStore = ComponentsStore()
 
-    @Suppress("UNCHECKED_CAST")
-    fun <T> bindComponent(owner: IHasComponent): T {
-        when (owner) {
-            is Application -> addLifecycleCallbacks(owner)
-        }
-        return getComponentOrCreate(owner.getComponentKey(), owner) as T
+    fun init(app: Application) {
+        app.registerActivityLifecycleCallbacks(ActivityLifecycleHelper(componentsStore))
     }
+
+    @Suppress("UNCHECKED_CAST")
+    fun <T> bindComponent(owner: IHasComponent): T =
+        getComponentOrCreate(owner.getComponentKey(), owner) as T
 
     inline fun <reified T> findComponent(): T =
         findComponentByPredicate { it is T } as T
 
-    fun findComponentByPredicate(predicate: (Any) -> Boolean) =
+    fun findComponentByPredicate(predicate: (Any) -> Boolean): Any =
         componentsStore.findComponent(predicate)
 
     private fun getComponentOrCreate(key: String, owner: IHasComponent): Any {
@@ -36,9 +36,5 @@ class InjectionManager {
             componentsStore.isExist(key) -> componentsStore.get(key)
             else -> owner.createComponent().also { componentsStore.add(key, it) }
         }
-    }
-
-    private fun addLifecycleCallbacks(app: Application) {
-        app.registerActivityLifecycleCallbacks(ActivityLifecycleHelper(componentsStore))
     }
 }

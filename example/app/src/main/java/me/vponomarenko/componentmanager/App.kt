@@ -15,6 +15,7 @@ class App : Application(), IHasComponent {
 
     override fun onCreate() {
         super.onCreate()
+        InjectionManager.instance.init(this)
         InjectionManager.instance
             .bindComponent<AppComponent>(this)
             .inject(this)
