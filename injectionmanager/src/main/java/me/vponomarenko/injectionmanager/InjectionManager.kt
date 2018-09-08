@@ -10,7 +10,6 @@ import me.vponomarenko.injectionmanager.helpers.ActivityLifecycleHelper
  */
 
 class InjectionManager {
-
     companion object {
         @JvmStatic val instance = InjectionManager()
     }
@@ -26,9 +25,9 @@ class InjectionManager {
         getComponentOrCreate(owner.getComponentKey(), owner) as T
 
     inline fun <reified T> findComponent(): T =
-        findComponentByPredicate { it is T } as T
+        findComponent { it is T } as T
 
-    fun findComponentByPredicate(predicate: (Any) -> Boolean): Any =
+    fun findComponent(predicate: (Any) -> Boolean): Any =
         componentsStore.findComponent(predicate)
 
     private fun getComponentOrCreate(key: String, owner: IHasComponent): Any {

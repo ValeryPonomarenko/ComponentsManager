@@ -11,7 +11,8 @@ import me.vponomarenko.injectionmanager.exeptions.ComponentNotFoundException
 internal class ComponentsStore {
     private val componentsForView = mutableMapOf<String, Any>()
 
-    fun isExist(key: String) = componentsForView.containsKey(key)
+    fun isExist(key: String): Boolean =
+        componentsForView.containsKey(key)
 
     fun add(key: String, component: Any) {
         componentsForView[key] = component
@@ -26,7 +27,7 @@ internal class ComponentsStore {
 
     fun findComponent(predicate: (Any) -> Boolean): Any {
         for ((_, component) in componentsForView) {
-            if (predicate(component)) { return component }
+            if (predicate(component)) return component
         }
         throw ComponentNotFoundException()
     }
