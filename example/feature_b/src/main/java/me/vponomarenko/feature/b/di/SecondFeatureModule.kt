@@ -3,6 +3,7 @@ package me.vponomarenko.feature.b.di
 import dagger.Module
 import dagger.Provides
 import me.vponomarenko.core.TextHolder
+import me.vponomarenko.feature.b.SomeClass
 
 /**
  * Author: Valery Ponomarenko
@@ -11,9 +12,8 @@ import me.vponomarenko.core.TextHolder
  */
 
 @Module
-class FeatureBModule {
-    @FeatureBScope
-    @TextHolderForFeatureB
+class SecondFeatureModule {
+    @SecondFeatureScope
     @Provides
-    fun providerTextHolderForFeatureB() = TextHolder()
+    fun provideSomeClass() = SomeClass()
 }

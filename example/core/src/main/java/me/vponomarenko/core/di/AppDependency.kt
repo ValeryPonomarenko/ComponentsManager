@@ -8,6 +8,6 @@ import me.vponomarenko.core.TextHolder
  * LinkedIn: https://www.linkedin.com/in/ponomarenkovalery
  */
 
-interface AppDependencies {
+interface AppDependency {
     fun provideSingletonTextHolder(): TextHolder
 }

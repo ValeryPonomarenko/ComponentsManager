@@ -1,5 +1,3 @@
 <resources>
     <string name="change_text">Change text</string>
-    <string name="singleton_scope">\@Singleton scope</string>
-    <string name="feature_b_scope">\@FeatureB scope</string>
 </resources>

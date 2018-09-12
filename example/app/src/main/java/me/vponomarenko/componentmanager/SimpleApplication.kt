@@ -11,7 +11,7 @@ import me.vponomarenko.injectionmanager.InjectionManager
  * LinkedIn: https://www.linkedin.com/in/ponomarenkovalery
  */
 
-class App : Application(), IHasComponent {
+class SimpleApplication : Application(), IHasComponent {
 
     override fun onCreate() {
         super.onCreate()

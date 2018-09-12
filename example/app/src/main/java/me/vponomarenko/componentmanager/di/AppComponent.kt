@@ -1,8 +1,8 @@
 package me.vponomarenko.componentmanager.di
 
 import dagger.Component
-import me.vponomarenko.componentmanager.App
-import me.vponomarenko.core.di.AppDependencies
+import me.vponomarenko.componentmanager.SimpleApplication
+import me.vponomarenko.core.di.AppDependency
 import javax.inject.Singleton
 
 /**
@@ -13,8 +13,8 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [AppModule::class])
-interface AppComponent : AppDependencies {
-    fun inject(app: App)
+interface AppComponent : AppDependency {
+    fun inject(simpleApplication: SimpleApplication)
 
     class Initializer private constructor() {
         companion object {

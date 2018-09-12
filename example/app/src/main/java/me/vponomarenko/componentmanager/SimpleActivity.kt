@@ -5,20 +5,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import me.vponomarenko.feature.a.FragmentA
-import me.vponomarenko.feature.b.FragmentB
+import me.vponomarenko.feature.a.FirstFragment
+import me.vponomarenko.feature.b.SecondFragment
 
-class MainActivity : AppCompatActivity() {
+class SimpleActivity : AppCompatActivity() {
 
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_feature_a -> {
-                    openFragment(FragmentA())
+                    openFragment(FirstFragment())
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_feature_b -> {
-                    openFragment(FragmentB())
+                    openFragment(SecondFragment())
                     return@OnNavigationItemSelectedListener true
                 }
             }
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         if (savedInstanceState == null) {
-            openFragment(FragmentA())
+            openFragment(FirstFragment())
         }
     }
 

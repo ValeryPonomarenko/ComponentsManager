@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_feature_a.*
+import kotlinx.android.synthetic.main.fragment_first.*
 import me.vponomarenko.core.TextHolder
-import me.vponomarenko.feature.a.di.FeatureAComponent
+import me.vponomarenko.feature.a.di.DaggerFirstFeatureComponent
+import me.vponomarenko.feature.a.di.FirstFeatureComponent
 import me.vponomarenko.injectionmanager.IHasComponent
 import me.vponomarenko.injectionmanager.InjectionManager
 import javax.inject.Inject
@@ -18,12 +19,12 @@ import javax.inject.Inject
  * LinkedIn: https://www.linkedin.com/in/ponomarenkovalery
  */
 
-class FragmentA : Fragment(), IHasComponent {
+class FirstFragment : Fragment(), IHasComponent {
 
     @Inject
     lateinit var textHolder: TextHolder
 
-    private val textHolderWatcher = { changedText: String ->
+    private val textHolderObserver = { changedText: String ->
         text.text = changedText
     }
 
@@ -31,22 +32,25 @@ class FragmentA : Fragment(), IHasComponent {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_feature_a, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_first, container, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        InjectionManager.instance.bindComponent<FeatureAComponent>(this).inject(this)
+        InjectionManager.instance.bindComponent<FirstFeatureComponent>(this).inject(this)
     }
 
     override fun onResume() {
         super.onResume()
-        textHolder.subscribe(textHolderWatcher)
+        textHolder.subscribe(textHolderObserver)
     }
 
     override fun onPause() {
         super.onPause()
-        textHolder.unsubscribe(textHolderWatcher)
+        textHolder.unsubscribe(textHolderObserver)
     }
 
-    override fun createComponent() = FeatureAComponent.Initializer.init()
+    override fun createComponent(): FirstFeatureComponent =
+        DaggerFirstFeatureComponent.builder()
+            .appDependency(InjectionManager.instance.findComponent())
+            .build()
 }
