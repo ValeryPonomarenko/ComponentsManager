@@ -49,7 +49,7 @@ class FirstFragment : Fragment(), IHasComponent {
         textHolder.unsubscribe(textHolderObserver)
     }
 
-    override fun createComponent(): FirstFeatureComponent =
+    override fun getComponent(): FirstFeatureComponent =
         DaggerFirstFeatureComponent.builder()
             .appDependency(InjectionManager.instance.findComponent())
             .build()

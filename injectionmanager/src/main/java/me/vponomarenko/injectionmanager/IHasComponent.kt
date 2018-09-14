@@ -7,6 +7,6 @@ package me.vponomarenko.injectionmanager
  */
 
 interface IHasComponent {
-    fun createComponent(): Any
+    fun getComponent(): Any
     fun getComponentKey(): String = javaClass.toString()
 }

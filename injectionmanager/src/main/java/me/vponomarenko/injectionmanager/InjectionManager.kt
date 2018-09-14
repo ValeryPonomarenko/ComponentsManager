@@ -33,7 +33,7 @@ class InjectionManager {
     private fun getComponentOrCreate(key: String, owner: IHasComponent): Any {
         return when {
             componentsStore.isExist(key) -> componentsStore.get(key)
-            else -> owner.createComponent().also { componentsStore.add(key, it) }
+            else -> owner.getComponent().also { componentsStore.add(key, it) }
         }
     }
 }

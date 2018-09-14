@@ -69,7 +69,7 @@ class SecondFragment : Fragment(), IHasComponent {
         singletonTextHolder.unsubscribe(textHolderObserver)
     }
 
-    override fun createComponent(): SecondFeatureComponent =
+    override fun getComponent(): SecondFeatureComponent =
         DaggerSecondFeatureComponent.builder()
             .appDependency(InjectionManager.instance.findComponent())
             .build()

@@ -21,5 +21,5 @@ class SimpleApplication : Application(), IHasComponent {
             .inject(this)
     }
 
-    override fun createComponent() = AppComponent.Initializer.init()
+    override fun getComponent() = AppComponent.Initializer.init()
 }
