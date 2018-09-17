@@ -52,5 +52,5 @@ class FragmentC : Fragment(), IHasComponent {
         storedComponent = null
     }
 
-    override fun createComponent() = FeatureCComponent.Initializer.init()
+    override fun getComponent() = FeatureCComponent.Initializer.init()
 }

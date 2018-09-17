@@ -10,7 +10,7 @@ interface IHasComponent {
     /**
      * Returns the component that will be saved in the store.
      */
-    fun createComponent(): Any
+    fun getComponent(): Any
 
     /**
      * Return the key, this key identifies the component in the store.

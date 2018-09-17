@@ -15,6 +15,7 @@ import me.vponomarenko.injectionmanager.callbacks.IRemoveComponentCallback
 class CompatFragmentLifecycleHelper(
     private val removeComponentCallback: IRemoveComponentCallback
 ) : FragmentManager.FragmentLifecycleCallbacks() {
+
     private var isInSaveState = false
 
     override fun onFragmentStarted(fm: FragmentManager, f: Fragment) {

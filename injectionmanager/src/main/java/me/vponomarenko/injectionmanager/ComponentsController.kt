@@ -16,19 +16,18 @@ internal class ComponentsController(
     private val platformLifecycleCallbacks: ILifecycleListener
 ) : IRemoveComponentCallback {
 
-    val keysForCustomLifecycle = mutableListOf<String>()
+    private val keysForCustomLifecycle = mutableListOf<String>()
 
     override fun onRemove(key: String) {
         if (keysForCustomLifecycle.contains(key)) return
         componentsStore.remove(key)
     }
 
-    fun bindComponent(owner: IHasComponent): Any {
-        if (owner is Application) {
-            addApplicationLifecycleListener(owner)
-        }
-        return buildOrCreateComponent(owner)
+    fun addLifecycleCallbackListeners(app: Application) {
+        platformLifecycleCallbacks.addLifecycleListener(app, this)
     }
+
+    fun bindComponent(owner: IHasComponent) = buildOrCreateComponent(owner)
 
     fun getCustomLifecycleForKey(key: String): IComponentLifecycle {
         keysForCustomLifecycle.add(key)
@@ -40,16 +39,12 @@ internal class ComponentsController(
         }
     }
 
-    private fun addApplicationLifecycleListener(app: Application) {
-        platformLifecycleCallbacks.addLifecycleListener(app, this)
-    }
-
     private fun buildOrCreateComponent(owner: IHasComponent): Any {
-        with (owner.getComponentKey()) {
+        with(owner.getComponentKey()) {
             if (componentsStore.isExist(this)) {
                 return componentsStore.get(this)
             }
-            return owner.createComponent().also { componentsStore.add(this, it) }
+            return owner.getComponent().also { componentsStore.add(this, it) }
         }
     }
 }

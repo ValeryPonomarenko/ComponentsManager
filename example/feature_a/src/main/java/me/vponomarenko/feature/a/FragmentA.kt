@@ -50,5 +50,5 @@ class FragmentA : Fragment(), IHasComponent {
         textHolder.unsubscribe(textHolderWatcher)
     }
 
-    override fun createComponent() = FeatureAComponent.Initializer.init()
+    override fun getComponent() = FeatureAComponent.Initializer.init()
 }
