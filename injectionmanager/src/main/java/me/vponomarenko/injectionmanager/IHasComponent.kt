@@ -14,7 +14,7 @@ interface IHasComponent {
 
     /**
      * Return the key, this key identifies the component in the store.
-     * The key must be unique for the every component.
+     * The key must be unique for every component.
      */
     fun getComponentKey(): String = javaClass.toString()
 }
