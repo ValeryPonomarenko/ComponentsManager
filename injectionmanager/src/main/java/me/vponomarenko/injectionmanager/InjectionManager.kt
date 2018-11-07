@@ -32,15 +32,14 @@ class InjectionManager(lifecycleListener: ILifecycleListener) {
      * Returns the created or saved component and binds it the [owner]'s lifecycle, so
      * when the [owner] is destroyed, the component will be destroyed too.
      */
-    @Suppress("UNCHECKED_CAST")
-    fun <T> bindComponent(owner: IHasComponent): T = componentsController.bindComponent(owner) as T
+    fun <T> bindComponent(owner: IHasComponent<T>): T = componentsController.bindComponent(owner)
 
     /**
      * Returns the created or saved component and binds it to the custom lifecycle.
      * The difference between this method and the bindComponent method is that when the [owner] is
      * destroyed, the component will not be destroyed. It is up to you to destroy the component.
      */
-    fun <T> bindComponentToCustomLifecycle(owner: IHasComponent) =
+    fun <T> bindComponentToCustomLifecycle(owner: IHasComponent<T>) =
         StoredComponent<T>(
             bindComponent(owner),
             componentsController.getCustomLifecycleForKey(owner.getComponentKey())

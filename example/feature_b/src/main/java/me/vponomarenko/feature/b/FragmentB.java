@@ -27,7 +27,7 @@ import me.vponomarenko.injectionmanager.x.XInjectionManager;
  * LinkedIn: https://www.linkedin.com/in/ponomarenkovalery
  */
 
-public class FragmentB extends Fragment implements IHasComponent {
+public class FragmentB extends Fragment implements IHasComponent<FeatureBComponent> {
 
     @Inject
     TextHolder singletonTextHolder;
@@ -81,7 +81,7 @@ public class FragmentB extends Fragment implements IHasComponent {
 
     @NotNull
     @Override
-    public Object getComponent() {
+    public FeatureBComponent getComponent() {
         return FeatureBComponent.Initializer.Companion.init();
     }
 

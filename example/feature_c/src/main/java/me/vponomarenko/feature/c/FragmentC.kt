@@ -21,7 +21,7 @@ import javax.inject.Inject
  * LinkedIn: https://www.linkedin.com/in/ponomarenkovalery
  */
 
-class FragmentC : Fragment(), IHasComponent {
+class FragmentC : Fragment(), IHasComponent<FeatureCComponent> {
 
     @Inject
     lateinit var singletonTextHolder: TextHolder

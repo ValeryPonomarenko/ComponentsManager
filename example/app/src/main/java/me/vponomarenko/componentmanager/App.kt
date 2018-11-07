@@ -11,13 +11,13 @@ import me.vponomarenko.injectionmanager.x.XInjectionManager
  * LinkedIn: https://www.linkedin.com/in/ponomarenkovalery
  */
 
-class App : Application(), IHasComponent {
+class App : Application(), IHasComponent<AppComponent> {
 
     override fun onCreate() {
         super.onCreate()
         XInjectionManager.instance.init(this)
         XInjectionManager.instance
-            .bindComponent<AppComponent>(this)
+            .bindComponent(this)
             .inject(this)
     }
 
