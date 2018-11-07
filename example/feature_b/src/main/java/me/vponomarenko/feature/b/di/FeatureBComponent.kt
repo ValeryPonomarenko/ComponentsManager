@@ -22,7 +22,7 @@ interface FeatureBComponent {
         companion object {
             fun init(): FeatureBComponent =
                 DaggerFeatureBComponent.builder()
-                    .appDependencies(XInjectionManager.instance.findComponent())
+                    .appDependencies(XInjectionManager.findComponent())
                     .build()
         }
     }

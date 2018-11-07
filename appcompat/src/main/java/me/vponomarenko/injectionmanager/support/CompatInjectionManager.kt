@@ -1,5 +1,7 @@
 package me.vponomarenko.injectionmanager.support
 
+import android.app.Application
+import me.vponomarenko.injectionmanager.IHasComponent
 import me.vponomarenko.injectionmanager.InjectionManager
 
 /**
@@ -11,4 +13,19 @@ import me.vponomarenko.injectionmanager.InjectionManager
 object CompatInjectionManager {
     @JvmStatic
     val instance = InjectionManager(CompatLifecycleListener())
+
+    @JvmStatic
+    fun init(app: Application) = instance.init(app)
+
+    @JvmStatic
+    fun <T> bindComponent(owner: IHasComponent): T = instance.bindComponent(owner)
+
+    @JvmStatic
+    fun <T> bindComponentToCustomLifecycle(owner: IHasComponent) = instance.bindComponentToCustomLifecycle<T>(owner)
+
+    @JvmStatic
+    inline fun <reified T> findComponent(): T = instance.findComponent()
+
+    @JvmStatic
+    fun findComponent(predicate: (Any) -> Boolean) = instance.findComponent(predicate)
 }
