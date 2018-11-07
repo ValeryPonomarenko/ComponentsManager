@@ -15,10 +15,11 @@ class App : Application(), IHasComponent {
 
     override fun onCreate() {
         super.onCreate()
+        XInjectionManager.instance.init(this)
         XInjectionManager.instance
             .bindComponent<AppComponent>(this)
             .inject(this)
     }
 
-    override fun createComponent() = AppComponent.Initializer.init()
+    override fun getComponent() = AppComponent.Initializer.init()
 }

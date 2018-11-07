@@ -1,5 +1,6 @@
 package me.vponomarenko.injectionmanager
 
+import android.app.Application
 import me.vponomarenko.injectionmanager.callbacks.ILifecycleListener
 import me.vponomarenko.injectionmanager.customlifecycle.StoredComponent
 
@@ -9,16 +10,22 @@ import me.vponomarenko.injectionmanager.customlifecycle.StoredComponent
  * LinkedIn: https://www.linkedin.com/in/ponomarenkovalery
  */
 
-class InjectionManager(
-    lifecycleListener: ILifecycleListener
-) {
-    private val componentStore = ComponentsStore()
+class InjectionManager(lifecycleListener: ILifecycleListener) {
+
+    private val componentsStore = ComponentsStore()
 
     private val componentsController: ComponentsController
 
     init {
         componentsController =
-            ComponentsController(componentStore, lifecycleListener)
+            ComponentsController(componentsStore, lifecycleListener)
+    }
+
+    /**
+     * Adds the lifecycle callbacks listeners
+     */
+    fun init(app: Application) {
+        componentsController.addLifecycleCallbackListeners(app)
     }
 
     /**
@@ -51,5 +58,5 @@ class InjectionManager(
      *
      * @throws me.vponomarenko.injectionmanager.exeptions.ComponentNotFoundException
      */
-    fun findComponent(predicate: (Any) -> Boolean) = componentStore.findComponent(predicate)
+    fun findComponent(predicate: (Any) -> Boolean) = componentsStore.findComponent(predicate)
 }

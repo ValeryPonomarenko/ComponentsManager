@@ -7,7 +7,7 @@
 - The components will be saved while the rotation changes
 
 ## Getting started
-This library is avaliable on jcenter
+This library is available on jcenter
 
 If you are using **AndroidX**
 
@@ -21,79 +21,64 @@ implementation "com.github.valeryponomarenko.componentsmanager:appcompat:LATEST_
 ```
 
 ## Idea
-The idea of the app is to save dagger components and return them when they are needed.
+The idea of the library is to save dagger components and return them when they are needed.
 Every component is saved in the static store and removed when the owner is going to be destroyed.
 
 ## How to use
-Implement the `IHasComponent` interface in the Application class. The method `createComponent` should return the dagger component. Also, you can override the method `getComponentKey` but it isn't important in this step.
+First thing first, add the lifecycle callbacks listeners. At this step the library registers the lifecycle listener for the future activities and the fragments so the components that are bound to the activity or fragment will be destroyed right after the destruction of the owner.
 
 ```kotlin
-class App : Application(), IHasComponent {
-    ...
-    override fun createComponent(): AppComponent = DaggerAppComponent.builder().build()
-}
-```
-Then bind this component to the owner. After the component was bound, the library returns the component, so you can do whatever you want with the component.
-
-Also, at this step the library registers the lifecycle listener for the future activities and the fragments, so the components that is bound to the activity or fragment will be destroyed right after the destruction of the owner.
-
-```kotlin
-class App : Application(), IHasComponent {
-
+class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        XInjectionManager.instance
-            .bindComponent<AppComponent>(this)
-            .inject(this)
-    }
-
-    override fun createComponent(): AppComponent = DaggerAppComponent.builder().build()
-}
-```
-If your class doesn't have its owen and uses, for example, the `MainComponent`, you need to class the `findComponent<AppComponent>` method and the library returns the needed component (if it exists, otherwise it will throw a `ComponentNotFoundException` exeption) .
-
-```kotlin
-class FragmentChildB : Fragment() {
-
-    @Inject
-    @field:TextHolderForFeatureB
-    lateinit var featureBTextHolder: TextHolder
-
-    @Inject
-    lateinit var singletonTextHolder: TextHolder
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        XInjectionManager.instance.findComponent<FeatureBComponent>().inject(this)
+        XInjectionManager.instance.init(this)
     }
 }
 ```
-If your class has a component, you must do the same that you did with the Application class.
-Firstly, implement the `IHasComponent` interface, then the method `createComponent` should return the dagger component and finally bind the component to the owner.
+
+For example, the `FirstFragment` (also it works for the activities too) has a component, so you must implement the `IHasComponent` interface and call the `bindComponent` method of the `InjectionManager` class. When the component is bound, it is available for other classes, but make sure, that these classes will not live longer than the owner of the component.
 
 ```kotlin
-class FragmentA : Fragment(), IHasComponent {
-
-    @Inject
-    lateinit var textHolder: TextHolder
-
+class FirstFragment : Fragment(), IHasComponent {
+    //code...
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        XInjectionManager.instance
-            .bindComponent<FeatureAComponent>(this)
-            .inject(this)
+        InjectionManager.instance.bindComponent<FirstFeatureComponent>(this).inject(this)
     }
 
-    override fun createComponent(): FeatureAComponent =
-        DaggerFeatureAComponent.builder()
-            .appDependencies(
-                XInjectionManager.instance.findComponent<AppDependencies>()
-            )
+    override fun getComponent(): FirstFeatureComponent =
+        DaggerFirstFeatureComponent.builder()
             .build()
 }
 ```
-Also, if a component needs a dependency, you can find it with method `findComponent`.
+
+If the fragment doesn’t have its own component and uses the `AppComponent` to inject the dependencies, just call the findComponent method and specify the class of the component and that is all.
+
+```kotlin
+class SecondFragment : Fragment() {
+    //code...
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        InjectionManager.instance.findComponent<AppComponent>().inject(this)
+    }
+}
+```
+
+Also, this method might be used for getting dagger dependencies to build some components.
+
+```kotlin
+class AnotherFragment : Fragment(), IHasComponent {
+    //code...
+    override fun getComponent(): AnotherFeatureComponent =
+        DaggerAnotherFeatureComponent.builder()
+            .appDependency(InjectionManager.instance.findComponent())
+            .build()
+}
+```
 
 That's all. There is no need to write code that will save, search or remove components anymore.
 
 For more information, please, read the [wiki pages](https://github.com/ValeryPonomarenko/ComponentsManager/wiki).
+
+## Credits
+If you have any questions, feel free to ask me on [LinkedIn](https://www.linkedin.com/in/ponomarenkovalery/).

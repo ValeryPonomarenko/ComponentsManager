@@ -18,7 +18,7 @@ interface AppComponent : AppDependencies {
 
     class Initializer private constructor() {
         companion object {
-            fun init(): AppComponent = DaggerAppComponent.builder().build()
+            fun init(): AppComponent = DaggerAppComponent.create()
         }
     }
 }

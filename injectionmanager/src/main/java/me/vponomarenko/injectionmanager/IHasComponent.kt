@@ -10,11 +10,11 @@ interface IHasComponent {
     /**
      * Returns the component that will be saved in the store.
      */
-    fun createComponent(): Any
+    fun getComponent(): Any
 
     /**
      * Return the key, this key identifies the component in the store.
-     * The key must be unique for the every component.
+     * The key must be unique for every component.
      */
     fun getComponentKey(): String = javaClass.toString()
 }

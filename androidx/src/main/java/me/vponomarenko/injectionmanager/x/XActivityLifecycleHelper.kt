@@ -16,6 +16,7 @@ import me.vponomarenko.injectionmanager.callbacks.IRemoveComponentCallback
 internal class XActivityLifecycleHelper(
     private val removeComponentCallback: IRemoveComponentCallback
 ) : Application.ActivityLifecycleCallbacks {
+
     override fun onActivityPaused(activity: Activity) {
     }
 

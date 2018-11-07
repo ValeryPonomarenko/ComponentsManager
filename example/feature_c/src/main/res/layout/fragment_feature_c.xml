@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:gravity="center"
         android:text="@string/singleton_scope"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toStartOf="@+id/label_feature_b"
@@ -23,12 +24,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:gravity="center"
         android:text="@string/feature_c_scope"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/label_singleton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="label_singleton,label_feature_b"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -38,7 +48,7 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="@+id/label_singleton"
         app:layout_constraintStart_toStartOf="@+id/label_singleton"
-        app:layout_constraintTop_toBottomOf="@+id/label_singleton"
+        app:layout_constraintTop_toTopOf="@+id/barrier_horizontal"
         tools:text="Time for singleton" />
 
     <TextView
@@ -48,8 +58,7 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="@+id/label_feature_b"
         app:layout_constraintStart_toStartOf="@+id/label_feature_b"
-        app:layout_constraintTop_toBottomOf="@+id/label_feature_b"
+        app:layout_constraintTop_toTopOf="@+id/barrier_horizontal"
         tools:text="Time for feature c" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

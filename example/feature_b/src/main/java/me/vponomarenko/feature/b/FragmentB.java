@@ -81,7 +81,7 @@ public class FragmentB extends Fragment implements IHasComponent {
 
     @NotNull
     @Override
-    public Object createComponent() {
+    public Object getComponent() {
         return FeatureBComponent.Initializer.Companion.init();
     }
 
