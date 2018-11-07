@@ -35,7 +35,7 @@ class FragmentA : Fragment(), IHasComponent {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        XInjectionManager.instance
+        XInjectionManager
             .bindComponent<FeatureAComponent>(this)
             .inject(this)
     }
