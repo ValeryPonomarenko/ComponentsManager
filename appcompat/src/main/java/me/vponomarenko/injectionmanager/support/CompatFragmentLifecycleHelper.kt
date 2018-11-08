@@ -35,7 +35,7 @@ class CompatFragmentLifecycleHelper(
 
     override fun onFragmentDestroyed(fm: FragmentManager, f: Fragment) {
         super.onFragmentDestroyed(fm, f)
-        if (f !is IHasComponent) return
+        if (f !is IHasComponent<*>) return
 
         if (f.requireActivity().isFinishing) {
             removeComponentCallback.onRemove(f.getComponentKey())

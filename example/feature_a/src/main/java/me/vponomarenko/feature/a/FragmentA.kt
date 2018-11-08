@@ -18,7 +18,7 @@ import javax.inject.Inject
  * LinkedIn: https://www.linkedin.com/in/ponomarenkovalery
  */
 
-class FragmentA : Fragment(), IHasComponent {
+class FragmentA : Fragment(), IHasComponent<FeatureAComponent> {
 
     @Inject
     lateinit var textHolder: TextHolder
@@ -36,7 +36,7 @@ class FragmentA : Fragment(), IHasComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         XInjectionManager
-            .bindComponent<FeatureAComponent>(this)
+            .bindComponent(this)
             .inject(this)
     }
 

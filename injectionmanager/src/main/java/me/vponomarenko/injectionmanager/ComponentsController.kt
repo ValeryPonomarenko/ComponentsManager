@@ -27,7 +27,7 @@ internal class ComponentsController(
         platformLifecycleCallbacks.addLifecycleListener(app, this)
     }
 
-    fun bindComponent(owner: IHasComponent) = buildOrCreateComponent(owner)
+    fun <T> bindComponent(owner: IHasComponent<T>) = buildOrCreateComponent(owner)
 
     fun getCustomLifecycleForKey(key: String): IComponentLifecycle {
         keysForCustomLifecycle.add(key)
@@ -39,12 +39,13 @@ internal class ComponentsController(
         }
     }
 
-    private fun buildOrCreateComponent(owner: IHasComponent): Any {
+    @Suppress("UNCHECKED_CAST")
+    private fun <T> buildOrCreateComponent(owner: IHasComponent<T>): T {
         with(owner.getComponentKey()) {
             if (componentsStore.isExist(this)) {
-                return componentsStore.get(this)
+                return componentsStore.get(this) as T
             }
-            return owner.getComponent().also { componentsStore.add(this, it) }
+            return owner.getComponent().also { componentsStore.add(this, it as Any) }
         }
     }
 }

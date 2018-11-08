@@ -18,10 +18,10 @@ object CompatInjectionManager {
     fun init(app: Application) = instance.init(app)
 
     @JvmStatic
-    fun <T> bindComponent(owner: IHasComponent): T = instance.bindComponent(owner)
+    fun <T> bindComponent(owner: IHasComponent<T>): T = instance.bindComponent(owner)
 
     @JvmStatic
-    fun <T> bindComponentToCustomLifecycle(owner: IHasComponent) = instance.bindComponentToCustomLifecycle<T>(owner)
+    fun <T> bindComponentToCustomLifecycle(owner: IHasComponent<T>) = instance.bindComponentToCustomLifecycle<T>(owner)
 
     @JvmStatic
     inline fun <reified T> findComponent(): T = instance.findComponent()

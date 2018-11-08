@@ -27,7 +27,7 @@ internal class CompatActivityLifecycleHelper(
     }
 
     override fun onActivityDestroyed(activity: Activity) {
-        if (activity is IHasComponent && activity.isFinishing) {
+        if (activity is IHasComponent<*> && activity.isFinishing) {
             removeComponentCallback.onRemove(activity.getComponentKey())
         }
     }

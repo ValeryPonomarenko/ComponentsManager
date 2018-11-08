@@ -6,11 +6,11 @@ package me.vponomarenko.injectionmanager
  * LinkedIn: https://www.linkedin.com/in/ponomarenkovalery
  */
 
-interface IHasComponent {
+interface IHasComponent<out T> {
     /**
      * Returns the component that will be saved in the store.
      */
-    fun getComponent(): Any
+    fun getComponent(): T
 
     /**
      * Return the key, this key identifies the component in the store.
