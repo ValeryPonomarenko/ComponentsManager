@@ -25,34 +25,6 @@ The idea of the library is to save dagger components and return them when they a
 Every component is saved in the static store and removed when the owner is going to be destroyed.
 
 ## What's new
-### 2.0.0
-The main difference between the **2.0.0** version and the **1.1.0** version that the **IHasComponent** interface is a generic one. Therefore, you must specify the class of the component.
-```kotlin
-//before
-class MyFragment : Fragment(), IHasComponent {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        XInjectionManager
-            .bindComponent<MyComponent>(this)
-            .inject(this)
-    }
-
-    override fun getComponent(): Any = DaggerMyComponent.create()
-}
-
-//after
-class MyFragment : Fragment(), IHasComponent<MyComponent> {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        XInjectionManager
-            .bindComponent(this)
-            .inject(this)
-    }
-
-    override fun getComponent(): MyComponent = DaggerMyComponent.create()
-}
-```
-
 ### 1.1.0
 Add static methods into the (X/Compat)InjectionManager, so there will no need to get the instance and then call the needed method.
 Examples:
@@ -71,8 +43,6 @@ fun foo() {
 ```
 
 ## How to use
-README for the **1.x.x** of the library lives [here](https://github.com/ValeryPonomarenko/ComponentsManager/blob/master/README_V1.md).
-
 The following example will be for the **AndroidX**. If you want to use this library for the **AppCompat** packages, just change **XInjectionManager** to **CompatInjectionManager**.
 
 First thing first, add the lifecycle callbacks listeners. At this step the library registers the lifecycle listener for the future activities and the fragments so the components that are bound to the activity or fragment will be destroyed right after the destruction of the owner.
@@ -89,11 +59,11 @@ class App : Application() {
 For example, the `FirstFragment` (also it works for the activities too) has a component, so you must implement the `IHasComponent` interface and call the `bindComponent` method of the `XInjectionManager` class. When the component is bound, it is available for other classes, but make sure, that these classes will not live longer than the owner of the component.
 
 ```kotlin
-class FirstFragment : Fragment(), IHasComponent<FirstFeatureComponent> {
+class FirstFragment : Fragment(), IHasComponent {
     //code...
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        XInjectionManager.bindComponent(this).inject(this)
+        XInjectionManager.bindComponent<FirstFeatureComponent>(this).inject(this)
     }
 
     override fun getComponent(): FirstFeatureComponent =
@@ -117,7 +87,7 @@ class SecondFragment : Fragment() {
 Also, this method might be used for getting dagger dependencies to build some components.
 
 ```kotlin
-class AnotherFragment : Fragment(), IHasComponent<AnotherFeatureComponent> {
+class AnotherFragment : Fragment(), IHasComponent {
     //code...
     override fun getComponent(): AnotherFeatureComponent =
         DaggerAnotherFeatureComponent.builder()
@@ -130,7 +100,7 @@ That's all. There is no need to write code that will save, search or remove comp
 
 For more information, please, read the [wiki pages](https://github.com/ValeryPonomarenko/ComponentsManager/wiki).
 
-## Links
+## Credits
 [Lifecycle aware Dagger components - ProAndroidDev](https://proandroiddev.com/lifecycle-aware-dagger-components-8c74d01fa15)
 
 If you have any questions, feel free to ask me on [LinkedIn](https://www.linkedin.com/in/ponomarenkovalery/).
