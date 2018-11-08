@@ -61,7 +61,7 @@ public class FragmentB extends Fragment implements IHasComponent<FeatureBCompone
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FeatureBComponent component = XInjectionManager.getInstance().bindComponent(this);
+        FeatureBComponent component = XInjectionManager.bindComponent(this);
         component.inject(this);
         if (savedInstanceState == null) {
             getChildFragmentManager().beginTransaction()

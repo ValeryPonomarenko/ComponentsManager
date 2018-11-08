@@ -40,7 +40,7 @@ class FragmentC : Fragment(), IHasComponent<FeatureCComponent> {
 
     override fun onResume() {
         super.onResume()
-        storedComponent = XInjectionManager.instance.bindComponentToCustomLifecycle(this)
+        storedComponent = XInjectionManager.bindComponentToCustomLifecycle(this)
         storedComponent?.component?.inject(this)
         text_singleton.text = singletonTextHolder.text
         text_feature_c_scope.text = featureCTextHolder.text

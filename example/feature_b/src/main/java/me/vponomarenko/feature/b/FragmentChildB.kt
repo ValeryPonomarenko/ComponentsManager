@@ -43,7 +43,7 @@ class FragmentChildB : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        XInjectionManager.instance.findComponent<FeatureBComponent>().inject(this)
+        XInjectionManager.findComponent<FeatureBComponent>().inject(this)
     }
 
     override fun onResume() {

@@ -24,7 +24,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation project(':core')
 
@@ -34,5 +34,6 @@ dependencies {
     implementation "com.google.dagger:dagger:${versions.dagger}"
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
 
-    implementation "com.github.valeryponomarenko.componentsmanager:androidx:${versions.componentmanager}"
+    implementation project(":androidx")
+//    implementation "com.github.valeryponomarenko.componentsmanager:androidx:${versions.componentmanager}"
 }
