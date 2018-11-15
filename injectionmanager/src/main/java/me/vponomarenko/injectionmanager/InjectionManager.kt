@@ -50,7 +50,14 @@ class InjectionManager(lifecycleListener: ILifecycleListener) {
      *
      * @throws me.vponomarenko.injectionmanager.exeptions.ComponentNotFoundException
      */
-    inline fun <reified T> findComponent(): T = findComponent { it is T } as T
+    inline fun <reified T> findComponent(): T {
+        val predicate = object : (Any) -> Boolean {
+            override fun invoke(component: Any): Boolean = component is T
+
+            override fun toString(): String = T::class.java.simpleName
+        }
+        return findComponent(predicate) as T
+    }
 
     /**
      * Finds the component by [predicate]
