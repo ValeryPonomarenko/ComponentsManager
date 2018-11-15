@@ -1,5 +1,5 @@
 # ComponentsManager
-![VERSION](https://api.bintray.com/packages/valeryponomarenko/ComponentsManager/Core/images/download.svg)
+![VERSION](https://api.bintray.com/packages/valeryponomarenko/ComponentsManager/Core/images/download.svg?version=1.1.1) ](https://bintray.com/valeryponomarenko/ComponentsManager/Core/1.1.1/link)
 
 ## Benefits
 - No need to save the components somewhere
@@ -23,6 +23,37 @@ implementation "com.github.valeryponomarenko.componentsmanager:appcompat:LATEST_
 ## Idea
 The idea of the library is to save dagger components and return them when they are needed.
 Every component is saved in the static store and removed when the owner is going to be destroyed.
+
+## What's new
+### 1.1.1
+If you use the `*InjectionManager.findComponent()` method and the component was not found, the ComponentNotFoundException will be more informative, beucase the type of the component will be printed.
+```kotlin
+//before
+Caused by: me.vponomarenko.injectionmanager.exeptions.ComponentNotFoundException: Component for the Function1<java.lang.Object, java.lang.Boolean> was not found
+...
+
+//after
+Caused by: me.vponomarenko.injectionmanager.exeptions.ComponentNotFoundException: Component of the FragmentChildB type was not found
+...
+```
+But if you use the `*InjectionManager.findComponent(predicate)` method, the exception's massage will be the same as it was in 1.1.0.
+
+### 1.1.0
+Add static methods into the (X/Compat)InjectionManager, so there will no need to get the instance and then call the needed method.
+Examples:
+```kotlin
+//before
+fun foo() {
+    XInjectionManager.instance.init(this)
+    XInjectionManager.instance.bindComponent<AppComponent>(this)
+}
+
+//after
+fun foo() {
+    XInjectionManager.init(this)
+    XInjectionManager.bindComponent<AppComponent>(this)
+}
+```
 
 ## How to use
 The following example will be for the **AndroidX**. If you want to use this library for the **AppCompat** packages, just change **XInjectionManager** to **CompatInjectionManager**.

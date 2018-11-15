@@ -35,5 +35,5 @@ ext.versions = [
         vectordrawable  : "1.0.0-rc01",
         dagger          : "2.17",
         supportappcompat: "27.1.1",
-        componentmanager: "1.1.0"
+        componentmanager: "1.1.1"
 ]
