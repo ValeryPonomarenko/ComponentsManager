@@ -6,4 +6,4 @@ package me.vponomarenko.injectionmanager.exeptions
  * LinkedIn: https://www.linkedin.com/in/ponomarenkovalery
  */
  
-class ComponentNotFoundException(key: String) : Throwable("Component for the $key was not found")
+class ComponentNotFoundException(key: String) : Throwable("Component of the $key type was not found")
