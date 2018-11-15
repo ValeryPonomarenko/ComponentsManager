@@ -1,7 +1,7 @@
 # ComponentsManager
 ![VERSION](https://api.bintray.com/packages/valeryponomarenko/ComponentsManager/Core/images/download.svg)
 
-README for the **1.x.x** of the library lives [here](https://github.com/ValeryPonomarenko/ComponentsManager/blob/master/README_V1.md).
+README for the **1.x.x** of the library lives [here](https://github.com/ValeryPonomarenko/ComponentsManager/blob/master_v1/README.md).
 
 ## Benefits
 - No need to save the components somewhere
@@ -29,13 +29,15 @@ Every component is saved in the static store and removed when the owner is going
 ## What's new
 ### 2.0.1
 If you use the `*InjectionManager.findComponent()` method and the component was not found, the ComponentNotFoundException will be more informative, beucase the type of the component will be printed.
-```kotlin
+```
 //before
-Caused by: me.vponomarenko.injectionmanager.exeptions.ComponentNotFoundException: Component for the Function1<java.lang.Object, java.lang.Boolean> was not found
+Caused by: me.vponomarenko.injectionmanager.exeptions.ComponentNotFoundException:
+    Component for the Function1<java.lang.Object, java.lang.Boolean> was not found
 ...
 
 //after
-Caused by: me.vponomarenko.injectionmanager.exeptions.ComponentNotFoundException: Component of the FragmentChildB type was not found
+Caused by: me.vponomarenko.injectionmanager.exeptions.ComponentNotFoundException: 
+    Component of the FragmentChildB type was not found
 ...
 ```
 But if you use the `*InjectionManager.findComponent(predicate)` method, the exception's massage will be the same as it was in 2.0.0.
