@@ -25,5 +25,8 @@ before_install:
   - yes | sdkmanager "platforms;android-26"
   - yes | sdkmanager "platforms;android-27"
 
+before_script:
+  - touch local.properties
+
 script:
   - "./gradlew clean build"
