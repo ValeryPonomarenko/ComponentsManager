@@ -1,5 +1,7 @@
 # ComponentsManager
-![VERSION](https://api.bintray.com/packages/valeryponomarenko/ComponentsManager/Core/images/download.svg) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/10bc687809e44c2a8c8f49c3cbd7cfbe)](https://www.codacy.com/app/ValeryPonomarenko/ComponentsManager?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ValeryPonomarenko/ComponentsManager&amp;utm_campaign=Badge_Grade)
+![VERSION](https://api.bintray.com/packages/valeryponomarenko/ComponentsManager/Core/images/download.svg)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/10bc687809e44c2a8c8f49c3cbd7cfbe)](https://www.codacy.com/app/ValeryPonomarenko/ComponentsManager?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ValeryPonomarenko/ComponentsManager&amp;utm_campaign=Badge_Grade)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Components%20Manager-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7402)
 
 README for the **1.x.x** of the library lives [here](https://github.com/ValeryPonomarenko/ComponentsManager/blob/master_v1/README.md).
 
