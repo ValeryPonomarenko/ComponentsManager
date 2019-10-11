@@ -29,6 +29,23 @@ The idea of the library is to save dagger components and return them when they a
 Every component is saved in the static store and removed when the owner is going to be destroyed.
 
 ## What's new
+### 2.1.0
+`*InjectionManager`s have two new methods to find a component. The methods return `null` if a component was not found and no exceptions are thrown.
+
+```kotlin
+// finds a component by type
+XInjectionManager
+    .findComponentOrNull<SomeComponent>()
+    ?.someMethod()
+
+// finds a component by predicate
+XInjectionManager
+    .findComponentOrNull { /* predicate */ }
+    ?.someMethod()
+```
+
+The `ComponentNotFoundException` class that is inside `me.vponomarenko.injectionmanager.exeptions` package is deprecated, because the `exeptions` was misspelled, so use `ComponentNotFoundException` that is inside `me.vponomarenko.injectionmanager.exceptions` package. The new `ComponentNotFoundException` class is inherited from the old one.
+
 ### 2.0.1
 If you use the `*InjectionManager.findComponent()` method and the component was not found, the ComponentNotFoundException will be more informative, beucase the type of the component will be printed.
 ```
