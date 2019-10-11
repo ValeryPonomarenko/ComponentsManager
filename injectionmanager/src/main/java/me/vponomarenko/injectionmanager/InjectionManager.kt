@@ -3,6 +3,7 @@ package me.vponomarenko.injectionmanager
 import android.app.Application
 import me.vponomarenko.injectionmanager.callbacks.ILifecycleListener
 import me.vponomarenko.injectionmanager.customlifecycle.StoredComponent
+import me.vponomarenko.injectionmanager.exceptions.ComponentNotFoundException
 
 /**
  * Author: Valery Ponomarenko
@@ -48,7 +49,7 @@ class InjectionManager(lifecycleListener: ILifecycleListener) {
     /**
      * Finds the component by the given class
      *
-     * @throws me.vponomarenko.injectionmanager.exeptions.ComponentNotFoundException
+     * @throws me.vponomarenko.injectionmanager.exceptions.ComponentNotFoundException
      */
     inline fun <reified T> findComponent(): T {
         val predicate = object : (Any) -> Boolean {
@@ -60,9 +61,31 @@ class InjectionManager(lifecycleListener: ILifecycleListener) {
     }
 
     /**
+     * Finds the component by the given class.
+     * Returns null if component was not found.
+     */
+    inline fun <reified T> findComponentOrNull(): T? {
+        val predicate = object : (Any) -> Boolean {
+            override fun invoke(component: Any): Boolean = component is T
+
+            override fun toString(): String = T::class.java.simpleName
+        }
+        return findComponentOrNull(predicate) as? T
+    }
+
+    /**
      * Finds the component by [predicate]
      *
-     * @throws me.vponomarenko.injectionmanager.exeptions.ComponentNotFoundException
+     * @throws me.vponomarenko.injectionmanager.exceptions.ComponentNotFoundException
      */
-    fun findComponent(predicate: (Any) -> Boolean) = componentsStore.findComponent(predicate)
+    fun findComponent(predicate: (Any) -> Boolean): Any =
+        componentsStore.findComponent(predicate)
+            ?: throw ComponentNotFoundException(predicate.toString())
+
+    /**
+     * Finds the component by [predicate].
+     * Returns null if component was not found.
+     */
+    fun findComponentOrNull(predicate: (Any) -> Boolean): Any? =
+        componentsStore.findComponent(predicate)
 }

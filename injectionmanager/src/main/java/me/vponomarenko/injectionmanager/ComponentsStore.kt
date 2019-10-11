@@ -1,7 +1,5 @@
 package me.vponomarenko.injectionmanager
 
-import me.vponomarenko.injectionmanager.exeptions.ComponentNotFoundException
-
 /**
  * Author: Valery Ponomarenko
  * Date: 25/08/2018
@@ -18,13 +16,13 @@ internal class ComponentsStore {
         components[key] = component
     }
 
-    fun get(key: String): Any = components[key] ?: throw ComponentNotFoundException(key)
+    fun get(key: String): Any? = components[key]
 
-    fun findComponent(predicate: (Any) -> Boolean): Any {
+    fun findComponent(predicate: (Any) -> Boolean): Any? {
         for ((_, component) in components) {
-            if (predicate(component)) { return component }
+            if (predicate(component)) return component
         }
-        throw ComponentNotFoundException(predicate.toString())
+        return null
     }
 
     fun remove(key: String) {
