@@ -1,4 +1,5 @@
 # ComponentsManager
+[![](https://jitpack.io/v/ValeryPonomarenko/ComponentsManager.svg)](https://jitpack.io/#ValeryPonomarenko/ComponentsManager)
 ![VERSION](https://api.bintray.com/packages/valeryponomarenko/ComponentsManager/Core/images/download.svg)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/10bc687809e44c2a8c8f49c3cbd7cfbe)](https://www.codacy.com/app/ValeryPonomarenko/ComponentsManager?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ValeryPonomarenko/ComponentsManager&amp;utm_campaign=Badge_Grade)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Components%20Manager-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7402)
@@ -11,8 +12,18 @@ README for the **1.x.x** of the library lives [here](https://github.com/ValeryPo
 - The components will be saved while the rotation changes
 
 ## Getting started
-This library is available on jcenter
+This library is available on jitpack and ~~jcenter~~.
 
+To download it from the jitpack, add these lines in your root build.gradle at the end of repositories:
+
+```gradle	
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
 If you are using **AndroidX**
 
 ```gradle
