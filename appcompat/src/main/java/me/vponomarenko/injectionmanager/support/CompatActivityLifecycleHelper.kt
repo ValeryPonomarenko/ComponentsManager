@@ -3,7 +3,7 @@ package me.vponomarenko.injectionmanager.support
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.FragmentActivity
 import me.vponomarenko.injectionmanager.IHasComponent
 import me.vponomarenko.injectionmanager.callbacks.IRemoveComponentCallback
 
@@ -39,7 +39,7 @@ internal class CompatActivityLifecycleHelper(
     }
 
     override fun onActivityCreated(activity: Activity, outState: Bundle?) {
-        if (activity is AppCompatActivity) {
+        if (activity is FragmentActivity) {
             activity.supportFragmentManager.registerFragmentLifecycleCallbacks(
                 CompatFragmentLifecycleHelper(removeComponentCallback),
                 true
