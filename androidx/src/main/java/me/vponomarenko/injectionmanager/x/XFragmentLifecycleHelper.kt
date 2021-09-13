@@ -16,23 +16,6 @@ internal class XFragmentLifecycleHelper(
     private val removeComponentCallback: IRemoveComponentCallback
 ) : FragmentManager.FragmentLifecycleCallbacks() {
 
-    private var isInSaveState = false
-
-    override fun onFragmentStarted(fm: FragmentManager, f: Fragment) {
-        super.onFragmentStarted(fm, f)
-        isInSaveState = false
-    }
-
-    override fun onFragmentResumed(fm: FragmentManager, f: Fragment) {
-        super.onFragmentResumed(fm, f)
-        isInSaveState = false
-    }
-
-    override fun onFragmentSaveInstanceState(fm: FragmentManager, f: Fragment, outState: Bundle) {
-        super.onFragmentSaveInstanceState(fm, f, outState)
-        isInSaveState = true
-    }
-
     override fun onFragmentDestroyed(fm: FragmentManager, f: Fragment) {
         super.onFragmentDestroyed(fm, f)
         if (f !is IHasComponent<*>) return
@@ -42,8 +25,7 @@ internal class XFragmentLifecycleHelper(
             return
         }
 
-        if (isInSaveState) {
-            isInSaveState = false
+        if (f.isStateSaved) {
             return
         }
 
