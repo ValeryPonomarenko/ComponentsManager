@@ -16,7 +16,7 @@ internal class ComponentsController(
     private val platformLifecycleCallbacks: ILifecycleListener
 ) : IRemoveComponentCallback {
 
-    private val keysForCustomLifecycle = mutableListOf<String>()
+    private val keysForCustomLifecycle = mutableSetOf<String>()
 
     override fun onRemove(key: String) {
         if (keysForCustomLifecycle.contains(key)) return
