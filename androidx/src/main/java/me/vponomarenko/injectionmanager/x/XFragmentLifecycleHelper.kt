@@ -32,7 +32,7 @@ internal class XFragmentLifecycleHelper(
         var anyParentIsRemoving = false
         var parent = f.parentFragment
         while (!anyParentIsRemoving && parent != null) {
-            anyParentIsRemoving = parent.isRemoving
+            anyParentIsRemoving = parent.isRemoving && !parent.isStateSaved
             parent = parent.parentFragment
         }
         if (f.isRemoving || anyParentIsRemoving) {
